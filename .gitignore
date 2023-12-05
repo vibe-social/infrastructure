@@ -1,0 +1,10 @@
+# Ignore config files
+.env
+
+# Ignore terraform files
+.terraform/
+.terraform.*
+terraform.*
+
+# Ignore AKS files
+kubeconfig*
