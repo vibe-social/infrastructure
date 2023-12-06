@@ -3,8 +3,10 @@
 
 # Ignore terraform files
 .terraform/
-.terraform.*
-terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+*.terraform.lock.hcl
 
 # Ignore AKS files
 kubeconfig*
