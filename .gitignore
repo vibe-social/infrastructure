@@ -1,12 +1,15 @@
+# Ignore Kubernetes secrets
+kubernetes/secret.yaml
+
 # Ignore config files
-.env
+terraform/.env
 
 # Ignore terraform files
-.terraform/
-*.tfstate
-*.tfstate.backup
-*.tfstate.lock.info
-*.terraform.lock.hcl
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/*.tfstate.lock.info
+terraform/*.terraform.lock.hcl
 
 # Ignore AKS files
-kubeconfig*
+terraform/kubeconfig*
