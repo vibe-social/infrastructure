@@ -1,3 +1,8 @@
+variable "project_name" {
+  description = "The name of the project."
+  default     = "vibe-social"
+}
+
 variable "aks_service_principal_client_id" {
   description = "The client id for the AKS service principal."
   default     = ""
