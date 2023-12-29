@@ -23,10 +23,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     vm_size    = var.instance_type
   }
 
-  service_principal {
-    client_id     = var.aks_service_principal_client_id
-    client_secret = var.aks_service_principal_client_secret
+  identity {
+    type = "SystemAssigned"
   }
 
-  role_based_access_control_enabled = true
 }
