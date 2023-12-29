@@ -1,19 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: minimal-ingress
+  name: ingress
   namespace: vibe-social
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx-example
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: event-tracking
+      port:
+        number: 80
   rules:
     - http:
         paths:
-          - path: /
+          - path: /event-tracking
             pathType: Prefix
             backend:
               service:
-                name: event-tracking-service
+                name: event-tracking
                 port:
                   number: 80
