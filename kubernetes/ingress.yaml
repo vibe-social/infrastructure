@@ -4,19 +4,15 @@ metadata:
   name: ingress
   namespace: vibe-social
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
-  defaultBackend:
-    service:
-      name: event-tracking
-      port:
-        number: 80
   rules:
     - http:
         paths:
-          - path: /event-tracking
-            pathType: Prefix
+          - path: /event-tracking(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: event-tracking
