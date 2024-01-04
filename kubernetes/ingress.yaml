@@ -10,7 +10,19 @@ spec:
   ingressClassName: nginx
   rules:
     - http:
+        defaultBackend:
+          service:
+            name: documentation
+            port:
+              number: 80
         paths:
+          - path: /documentation(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: documentation
+                port:
+                  number: 80
           - path: /event-tracking(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
