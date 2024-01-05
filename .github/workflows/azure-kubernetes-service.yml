@@ -37,6 +37,14 @@ jobs:
           admin: "false"
           use-kubelogin: "true"
 
+      - name: Deploys NGINX Ingress Controller
+        uses: azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ingress-nginx
+          manifests: |
+            ./kubernetes/ingress-nginx.yaml
+
       - name: Deploys application
         uses: azure/k8s-deploy@v4
         with:
@@ -44,5 +52,4 @@ jobs:
           namespace: vibe-social
           manifests: |
             ./kubernetes/namespace.yaml
-            ./kubernetes/ingress-nginx.yaml
             ./kubernetes/ingress.yaml
