@@ -32,3 +32,10 @@ spec:
                 name: event-tracking
                 port:
                   number: 80
+          - path: /location-discovery(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: location-discovery
+                port:
+                  number: 80
