@@ -8,14 +8,16 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
-  defaultBackend:
-    service:
-      name: vibe-social
-      port:
-        number: 80
   rules:
     - http:
         paths:
+          - path: /(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: documentation
+                port:
+                  number: 80
           - path: /documentation(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
