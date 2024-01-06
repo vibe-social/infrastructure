@@ -52,6 +52,12 @@ jobs:
           namespace: vibe-social
           manifests: |
             ./kubernetes/namespace.yaml
+            ./kubernetes/elastic/beat.yaml
+            ./kubernetes/elastic/crds.yaml
+            ./kubernetes/elastic/elasticsearch.yaml
+            ./kubernetes/elastic/kibana.yaml
+            ./kubernetes/elastic/logstash.yaml
+            ./kubernetes/elastic/operator.yaml
             ./kubernetes/grafana/grafana.yaml
             ./kubernetes/ingress/ingress.yaml
             ./kubernetes/prometheus/prometheus-rbac.yaml
