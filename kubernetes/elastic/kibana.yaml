@@ -1,0 +1,18 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: elastic
+  namespace: vibe-social
+spec:
+  version: 8.11.3
+  count: 1
+  elasticsearchRef:
+    name: elastic
+    namespace: vibe-social
+  http:
+    service:
+      spec:
+        type: LoadBalancer
+    tls:
+      selfSignedCertificate:
+        disabled: true

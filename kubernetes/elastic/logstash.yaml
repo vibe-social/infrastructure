@@ -1,0 +1,48 @@
+apiVersion: logstash.k8s.elastic.co/v1alpha1
+kind: Logstash
+metadata:
+  name: elastic
+  namespace: vibe-social
+spec:
+  count: 1
+  elasticsearchRefs:
+    - name: elastic
+      clusterName: elastic
+      namespace: vibe-social
+  version: 8.11.3
+  pipelines:
+    - pipeline.id: main
+      config.string: |
+        input {
+          beats {
+            port => 5044
+          }
+        }
+        output {
+          elasticsearch {
+            hosts => [ "${ELASTIC_ES_HOSTS}" ]
+            user => "${ELASTIC_ES_USER}"
+            password => "${ELASTIC_ES_PASSWORD}"
+            ssl_certificate_authorities => "${ELASTIC_ES_SSL_CERTIFICATE_AUTHORITY}"
+          }
+        }
+  services:
+    - name: beats
+      service:
+        spec:
+          ports:
+            - port: 5044
+              name: "filebeat"
+              protocol: TCP
+              targetPort: 5044
+  podTemplate:
+    spec:
+      containers:
+        - name: logtash
+          resources:
+            limits:
+              cpu: "1.0"
+              memory: "512Mi"
+            requests:
+              cpu: "0.1"
+              memory: "512Mi"
