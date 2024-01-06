@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-monitor
+  namespace: vibe-social
+spec:
+  selector:
+    matchLabels:
+      app: event-tracking
+  endpoints:
+    - path: /metrics
+      targetPort: 8080
+      interval: 30s
