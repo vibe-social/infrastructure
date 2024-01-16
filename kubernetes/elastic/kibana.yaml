@@ -12,7 +12,7 @@ spec:
   http:
     service:
       spec:
-        type: LoadBalancer
+        type: ClusterIP
     tls:
       selfSignedCertificate:
         disabled: true
