@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-swagger
+  namespace: vibe-social
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /swaggerui/$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: vibe-social.westeurope.cloudapp.azure.com
+      http:
+        paths:
+          - path: /location-discovery/swaggerui(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: location-discovery
+                port:
+                  number: 80

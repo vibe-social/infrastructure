@@ -4,15 +4,15 @@ metadata:
   name: ingress
   namespace: vibe-social
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
     - host: vibe-social.westeurope.cloudapp.azure.com
       http:
         paths:
-          - path: /documentation(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: documentation
@@ -25,10 +25,31 @@ spec:
                 name: event-tracking
                 port:
                   number: 80
+          - path: /event-tracking-grpc(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: event-tracking
+                port:
+                  number: 81
           - path: /location-discovery(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: location-discovery
+                port:
+                  number: 80
+          - path: /backend(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
+          - path: /payment-webhooks(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: payment-webhooks
                 port:
                   number: 80
