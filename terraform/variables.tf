@@ -35,10 +35,10 @@ variable "resource_group_location" {
 
 variable "instance_type" {
   description = "The instance type for the AKS cluster."
-  default     = "Standard_D4_v4"
+  default     = "Standard_D2_v2"
 }
 
 variable "node_count" {
   description = "The number of nodes for the AKS cluster."
-  default     = "4"
+  default     = "2"
 }
